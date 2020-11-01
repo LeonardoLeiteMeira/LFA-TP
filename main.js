@@ -6,11 +6,6 @@ const readline = require("readline").createInterface({
 });
 
 readInput = () => {
-    // readline.question("", (word) => {
-    //     if (word === "asd") return readline.close();
-    //     console.log(() => checkApd(word));
-    //     readInput();
-    // });
     readline.question("", (word) => helpers.checkWord(word));
 };
 

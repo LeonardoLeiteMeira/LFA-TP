@@ -25,7 +25,6 @@ module.exports = {
         }
         return transitions;
     },
-
     checkApd(word) {
         const apd = this.getApd();
         const stack = [];
@@ -41,7 +40,6 @@ module.exports = {
     },
 
     checkWord(word) {
-        if (word === "asd") return readline.close();
         this.checkApd(word);
         readInput();
     },

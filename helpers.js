@@ -1,5 +1,3 @@
-const { Console } = require("console");
-
 module.exports = {
     getApd() {
         file = JSON.parse(require("fs").readFileSync(process.argv[2])).ap;
@@ -27,7 +25,6 @@ module.exports = {
         }
         return transitions;
     },
-    makeTransition() {},
     hasTransitionsToMake(char, transitions, currentState, stack) {
         for (let index = 0; index < transitions.length; index++) {
             if (
@@ -71,12 +68,13 @@ module.exports = {
                 ) {
                     currentState = transition.to;
 
+                    transition.pop !== "#" && stack.pop();
+
                     const size = transition.push.length;
                     for (let i = size - 1; i >= 0; i--) {
-                        transition.push.charAt(i) != "#" &&
+                        transition.push.charAt(i) !== "#" &&
                             stack.push(transition.push.charAt(i));
                     }
-                    transition.pop !== "#" && stack.pop();
                     index++;
                     lamba = false;
                 }
@@ -84,17 +82,18 @@ module.exports = {
             if (lambda) {
                 [...transitions].forEach((transition) => {
                     if (
+                        transition.from === currentState &&
                         transition.input === "#" &&
                         (transition.pop === stack[stack.length - 1] ||
                             transition.pop === "#")
                     ) {
+                        transition.pop !== "#" && stack.pop();
                         currentState = transition.to;
                         const size = transition.push.length;
                         for (let idx = size - 1; idx >= 0; idx--) {
-                            transition.push.charAt(idx) != "#" &&
+                            transition.push.charAt(idx) !== "#" &&
                                 stack.push(transition.push.charAt(idx));
                         }
-                        transition.pop !== "#" && stack.pop();
                     }
                 });
             }

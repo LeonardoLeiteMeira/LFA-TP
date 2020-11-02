@@ -1,4 +1,4 @@
-#Para executar:
+# Para executar:
 
 E necessário ter o node instalado na máquina
 
